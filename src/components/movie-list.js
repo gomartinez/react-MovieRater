@@ -15,6 +15,12 @@ function MovieList(props){
             }).then( resp => props.movieDeleted(movie))
             .catch( error => console.log(error))
     }
+    const editClicked = movie =>{
+        props.editClicked(movie);
+    }
+    const newMovie = ()=>{
+        props.newMovie();
+    }
 
     
 
@@ -23,15 +29,16 @@ function MovieList(props){
             {
                 props.movies.map( movie =>{
                     return (
-                    <div key={movie.id} >
+                    <div key={movie.id} className="movie-item" >
                         <h3 onClick={movieClicked(movie)}>
                             {movie.title}
                         </h3>
-                        <FontAwesome name='edit'></FontAwesome>
+                        <FontAwesome name='edit' onClick={() => editClicked(movie)}></FontAwesome>
                         <FontAwesome name='trash' onClick={() => removeClicked(movie)}></FontAwesome>
                     </div>
                 )})
             }
+            <button onClick={newMovie}>Add new</button>
         </div>
     )
 }
